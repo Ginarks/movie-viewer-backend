@@ -6,8 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-const PORT = 3000;
-
+const PORT = process.env.PORT;
 const PASSPHRASE = process.env.PASSPHRASE;
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -17,10 +16,10 @@ app.post('/pass-check', (req, res) => {
   if (passphrase === PASSPHRASE) {
     console.log("PASSPHRASE MATCHED");
     const token = jwt.sign({ authorized: true }, JWT_SECRET, {expiresIn: '1d'});
-    res.json({ token });
+    res.status(200).json({ token });
   } else {
     console.log("PASSPHRASE MISMATCHED");
-    res.status(401).send("Unauthorized");
+    res.status(401).json({ authorized: false});
   }
 });
 
