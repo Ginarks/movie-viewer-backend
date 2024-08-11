@@ -1,6 +1,6 @@
 # movie-viewer-backend
 
-Server listening on PORT 3000
+start the server with: node index.js 
 
 with the routes:
   /pass-check:
